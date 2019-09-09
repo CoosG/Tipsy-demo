@@ -6,12 +6,12 @@ import { ActionSheetController } from '@ionic/angular';
 import { ConferenceData } from '../../providers/conference-data';
 
 @Component({
-  selector: 'page-speaker-list',
-  templateUrl: 'speaker-list.html',
-  styleUrls: ['./speaker-list.scss'],
+  selector: 'page-venue-list',
+  templateUrl: 'venue-list.html',
+  styleUrls: ['./venue-list.scss'],
 })
-export class SpeakerListPage {
-  speakers: any[] = [];
+export class VenueListPage {
+  venues: any[] = [];
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -21,34 +21,34 @@ export class SpeakerListPage {
   ) {}
 
   ionViewDidEnter() {
-    this.confData.getSpeakers().subscribe((speakers: any[]) => {
-      this.speakers = speakers;
+    this.confData.getVenues().subscribe((venues: any[]) => {
+      this.venues = venues;
     });
   }
 
-  goToSpeakerTwitter(speaker: any) {
+  goToVenueTwitter(venue: any) {
     this.inAppBrowser.create(
-      `https://twitter.com/${speaker.twitter}`,
+      `https://twitter.com/${venue.twitter}`,
       '_blank'
     );
   }
 
-  async openSpeakerShare(speaker: any) {
+  async openVenueShare(venue: any) {
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Share ' + speaker.name,
+      header: 'Share ' + venue.name,
       buttons: [
         {
           text: 'Copy Link',
           handler: () => {
             console.log(
-              'Copy link clicked on https://twitter.com/' + speaker.twitter
+              'Copy link clicked on https://twitter.com/' + venue.twitter
             );
             if (
               (window as any)['cordova'] &&
               (window as any)['cordova'].plugins.clipboard
             ) {
               (window as any)['cordova'].plugins.clipboard.copy(
-                'https://twitter.com/' + speaker.twitter
+                'https://twitter.com/' + venue.twitter
               );
             }
           }
@@ -66,24 +66,24 @@ export class SpeakerListPage {
     await actionSheet.present();
   }
 
-  async openContact(speaker: any) {
+  async openContact(venue: any) {
     const mode = 'ios'; // this.config.get('mode');
 
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Contact ' + speaker.name,
+      header: 'Contact ' + venue.name,
       buttons: [
         {
-          text: `Email ( ${speaker.email} )`,
+          text: `Email ( ${venue.email} )`,
           icon: mode !== 'ios' ? 'mail' : null,
           handler: () => {
-            window.open('mailto:' + speaker.email);
+            window.open('mailto:' + venue.email);
           }
         },
         {
-          text: `Call ( ${speaker.phone} )`,
+          text: `Call ( ${venue.phone} )`,
           icon: mode !== 'ios' ? 'call' : null,
           handler: () => {
-            window.open('tel:' + speaker.phone);
+            window.open('tel:' + venue.phone);
           }
         }
       ]

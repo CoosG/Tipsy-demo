@@ -1,0 +1,20 @@
+
+.venue-detail div {
+  position: relative;
+}
+
+.venue-detail img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.venue-detail ion-button {
+  position: absolute;
+  top: 85%;
+  right: 83%;
+  //background: #ffffff;
+}
+
+.venue-detail p {
+  color: #60646b;
+}
