@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/venues"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{venue?.name}}</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="venue-detail">
   <div *ngIf="venue" class="venue-detail">
-    <img [src]="venue.profilePic" [alt]="venue.name">
+    <!-- <img [src]="venue.profilePic" [alt]="venue.name"> -->
     <ion-button fill="clear" size="large" color="facebook">
       <ion-icon name="logo-facebook" slot="icon-only"></ion-icon>
     </ion-button>
@@ -18,5 +18,5 @@
     </ion-button> -->
   </div>
 
-  <p>{{venue?.about}}</p>
+  <p></p>
 </ion-content>

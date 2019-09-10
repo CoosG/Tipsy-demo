@@ -1,22 +1,52 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+export interface Venue {
+  id?: string;
+  name: string;
+  desc: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+  private venuesCollection: AngularFirestoreCollection<Venue>;
+  venues: Observable<Venue[]>;
 
-  constructor(public afd: AngularFireDatabase) { }
+  constructor(db: AngularFirestore) {
+    this.venuesCollection = db.collection<Venue>('registeredVenues');
+
+    this.venues = this.venuesCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
 
   getVenues() {
-    return this.afd.list('/registeredVenues/');
+    return this.venues;
   }
 
-  addVenues(id) {
-    return this.afd.list('/registeredVenues/').push(id);
+  getVenue(id) {
+    return this.venuesCollection.doc<Venue>(id).valueChanges();
   }
 
-  removeVenues(id) {
-    return this.afd.list('/registeredVenues/').remove(id);
+  updateVenue(venue: Venue, id: string) {
+    return this.venuesCollection.doc(id).update(venue);
+  }
+
+  addVenue(venue: Venue) {
+    return this.venuesCollection.add(venue);
+  }
+
+  removeVenue(id) {
+    return this.venuesCollection.doc(id).delete();
   }
 }

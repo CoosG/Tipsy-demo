@@ -1,21 +1,20 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 
 import { ConferenceData } from '../../providers/conference-data';
-import { FirebaseService } from './../../providers/firebase.service';
-import { AngularFireList } from 'angularfire2/database';
+import { Venue, FirebaseService } from '../../providers/firebase.service';
 
 @Component({
   selector: 'page-venue-list',
   templateUrl: 'venue-list.html',
   styleUrls: ['./venue-list.scss'],
 })
-export class VenueListPage {
+export class VenueListPage implements OnInit {
+
   venues: any[] = [];
-  venues1: AngularFireList<any>;
-  newVenue = '';
+  venues1: Venue[];
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -23,16 +22,16 @@ export class VenueListPage {
     public inAppBrowser: InAppBrowser,
     public router: Router,
     public firebaseService: FirebaseService
-  ) {
-    this.venues1 = this.firebaseService.getVenues();
+  ) { }
+
+  ngOnInit(): void {
+    this.firebaseService.getVenues().subscribe(res => {
+      this.venues1 = res;
+    });
   }
 
-  addVenues() {
-    this.firebaseService.addVenues(this.newVenue);
-  }
-
-  removeVenues(id) {
-    this.firebaseService.removeVenues(id);
+  remove(item) {
+    this.firebaseService.removeVenue(item.id);
   }
 
   ionViewDidEnter() {
