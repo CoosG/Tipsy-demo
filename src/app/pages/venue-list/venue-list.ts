@@ -4,6 +4,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 
 import { ConferenceData } from '../../providers/conference-data';
+import { FirebaseService } from './../../providers/firebase.service';
+import { AngularFireList } from 'angularfire2/database';
 
 @Component({
   selector: 'page-venue-list',
@@ -12,13 +14,26 @@ import { ConferenceData } from '../../providers/conference-data';
 })
 export class VenueListPage {
   venues: any[] = [];
+  venues1: AngularFireList<any>;
+  newVenue = '';
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
-    public router: Router
-  ) {}
+    public router: Router,
+    public firebaseService: FirebaseService
+  ) {
+    this.venues1 = this.firebaseService.getVenues();
+  }
+
+  addVenues() {
+    this.firebaseService.addVenues(this.newVenue);
+  }
+
+  removeVenues(id) {
+    this.firebaseService.removeVenues(id);
+  }
 
   ionViewDidEnter() {
     this.confData.getVenues().subscribe((venues: any[]) => {
