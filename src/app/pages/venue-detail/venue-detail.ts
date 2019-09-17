@@ -1,8 +1,6 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ConferenceData } from '../../providers/conference-data';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Venue, FirebaseService } from '../../providers/firebase.service';
-import { NavController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'page-venue-detail',
@@ -10,30 +8,32 @@ import { NavController, LoadingController } from '@ionic/angular';
   styleUrls: ['./venue-detail.scss'],
 })
 export class VenueDetailPage implements OnInit {
+
   venue: Venue = {
-    name: 'test',
-    desc: 'test'
+    id: '',
+    name: '',
+    desc: ''
   };
 
-  venueId = null;
-
   constructor(
-    // private dataProvider: ConferenceData,
-    // private router: Router,
     private route: ActivatedRoute,
     private firebaseService: FirebaseService,
-    private loadingController: LoadingController,
-    private nav: NavController,
   ) {}
 
-  ngOnInit(): void {
-    this.venueId = this.route.snapshot.params['id'];
-    if (this.venueId) {
-      this.loadVenue();
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    if (id) {
+      this.firebaseService.getVenue(id).subscribe((venue) => {
+        this.venue = venue;
+        console.log(venue.name);
+      });
     }
   }
 
-  async loadVenue() {
+  /*async loadVenue() {
     const loading = await this.loadingController.create({
       message: 'Loading Todo..'
     });
@@ -62,7 +62,7 @@ export class VenueDetailPage implements OnInit {
         this.nav.back();
       });
     }
-  }
+  }/*
 
   /*ionViewWillEnter() {
     this.dataProvider.load().subscribe((data: any) => {

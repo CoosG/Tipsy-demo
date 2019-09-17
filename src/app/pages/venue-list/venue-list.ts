@@ -1,43 +1,30 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 
-import { ConferenceData } from '../../providers/conference-data';
 import { Venue, FirebaseService } from '../../providers/firebase.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'page-venue-list',
-  templateUrl: 'venue-list.html',
+  templateUrl: './venue-list.html',
   styleUrls: ['./venue-list.scss'],
 })
 export class VenueListPage implements OnInit {
 
-  venues: any[] = [];
-  venues1: Venue[];
+  venues1: Observable<Venue[]>;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
-    public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
     public router: Router,
+    public route: ActivatedRoute,
     public firebaseService: FirebaseService
   ) { }
 
-  ngOnInit(): void {
-    this.firebaseService.getVenues().subscribe(res => {
-      this.venues1 = res;
-    });
-  }
-
-  remove(item) {
-    this.firebaseService.removeVenue(item.id);
-  }
-
-  ionViewDidEnter() {
-    this.confData.getVenues().subscribe((venues: any[]) => {
-      this.venues = venues;
-    });
+  ngOnInit() {
+    this.venues1 = this.firebaseService.getVenues();
   }
 
   goToVenueTwitter(venue: any) {

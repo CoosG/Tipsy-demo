@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference  } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { Venue } from './firebase.service';
 
 export interface Venue {
   id?: string;
@@ -14,10 +15,10 @@ export interface Venue {
 })
 export class FirebaseService {
   private venuesCollection: AngularFirestoreCollection<Venue>;
-  venues: Observable<Venue[]>;
+  private venues: Observable<Venue[]>;
 
-  constructor(db: AngularFirestore) {
-    this.venuesCollection = db.collection<Venue>('registeredVenues');
+  constructor(private db: AngularFirestore) {
+    this.venuesCollection = this.db.collection<Venue>('registeredVenues');
 
     this.venues = this.venuesCollection.snapshotChanges().pipe(
       map(actions => {
@@ -30,23 +31,29 @@ export class FirebaseService {
     );
   }
 
-  getVenues() {
+  getVenues(): Observable<Venue[]> {
     return this.venues;
   }
 
-  getVenue(id) {
-    return this.venuesCollection.doc<Venue>(id).valueChanges();
+  getVenue(id: string): Observable<Venue> {
+    return this.venuesCollection.doc<Venue>(id).valueChanges().pipe(
+      take(1), // not keeping any unnecessary observables, realtime value not needed in details page
+      map(registeredVenue => {
+        registeredVenue.id = id;
+        return registeredVenue;
+      })
+    );
   }
 
-  updateVenue(venue: Venue, id: string) {
-    return this.venuesCollection.doc(id).update(venue);
+  updateVenue(venue: Venue): Promise<void> {
+    return this.venuesCollection.doc(venue.id).update({ name: venue.name, desc: venue.desc });
   }
 
-  addVenue(venue: Venue) {
+  addVenue(venue: Venue): Promise<DocumentReference> {
     return this.venuesCollection.add(venue);
   }
 
-  removeVenue(id) {
+  removeVenue(id: string): Promise<void> {
     return this.venuesCollection.doc(id).delete();
   }
 }

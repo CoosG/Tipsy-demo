@@ -14,8 +14,8 @@
 <ion-content fullscreen>
   <ion-grid fixed>
     <ion-row>
-      <ion-col size="6" size-md="4" *ngFor="let venue of venues1">
-        <ion-card routerLink="/app/tabs/venues/venue-details/{{ venue.id }}">
+      <ion-col size="6" size-md="4" *ngFor="let venue of (venues1 | async )">
+        <ion-card routerLink="/app/tabs/venues/venue-details/{{venue.id}}">
           <ion-card-header>
             {{ venue.name }}
           </ion-card-header>
