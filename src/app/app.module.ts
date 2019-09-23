@@ -11,6 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
 
 @NgModule({
   imports: [
@@ -19,6 +23,10 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
+    WebView,
+    Camera,
+    File,
+    FilePath,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })
