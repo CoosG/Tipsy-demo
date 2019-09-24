@@ -80,7 +80,64 @@ $app->post('/api/user/add', function (Request $request, Response $response) {
 
       $stmt->execute();
 
-      echo '{"notice": {"text": "Customer Added"}}';
+      echo '{"notice": {"text": "User Added"}}';
+
+  }catch(PDOException $e){
+      echo '{"error": {"text": '.$e->getMessage().'}';
+  }
+});
+
+
+// Update User
+$app->put('/api/user/update/{id}', function (Request $request, Response $response) {
+
+  $id = $request->getAttribute('id');
+  $first_name = $request->getParam('u_name');
+  $last_name = $request->getParam('u_surname');
+  $firebase_id = $request->getParam('u_firebaseid');
+  $u_password = $request->getParam('u_password');
+  $email = $request->getParam('u_email');
+  $dob = $request->getParam('u_dob');
+
+  $sql = "UPDATE `users` SET
+            `u_id`=:u_id,
+            `u_name`=:u_name,
+            `u_surname`=:u_surname,
+            `u_firebaseid`=:u_firebaseid,
+            `u_password`=:u_password,
+            `u_email`=:u_email,
+            `u_dob`=:u_dob
+            WHERE u_id = $id";
+
+  /*$sql = "UPDATE `users` SET
+            `u_id`= :u_id,
+            `u_name`= :u_name,
+            `u_surname`= :u_surname,
+            `u_firebaseid`= u_firebaseid,
+            `u_password`= u_password,
+            `u_email`= u_email,
+            `u_dob`= u_dob
+          WHERE u_id = $id"; */
+
+  try{
+      //Get DB Object
+      $db = new db();
+      //Connect
+      $db = $db->connect();
+
+      $stmt = $db->prepare($sql);
+
+      $stmt->bindParam(':u_id', $id);
+      $stmt->bindParam(':u_name', $first_name);
+      $stmt->bindParam(':u_surname', $last_name);
+      $stmt->bindParam(':u_firebaseid', $firebase_id);
+      $stmt->bindParam(':u_password', $u_password);
+      $stmt->bindParam(':u_email', $email);
+      $stmt->bindParam(':u_dob', $dob);
+
+      $stmt->execute();
+
+      echo '{"notice": {"text": "User updated"}}';
 
   }catch(PDOException $e){
       echo '{"error": {"text": '.$e->getMessage().'}';
