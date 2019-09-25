@@ -109,16 +109,6 @@ $app->put('/api/user/update/{id}', function (Request $request, Response $respons
             `u_dob`=:u_dob
             WHERE u_id = $id";
 
-  /*$sql = "UPDATE `users` SET
-            `u_id`= :u_id,
-            `u_name`= :u_name,
-            `u_surname`= :u_surname,
-            `u_firebaseid`= u_firebaseid,
-            `u_password`= u_password,
-            `u_email`= u_email,
-            `u_dob`= u_dob
-          WHERE u_id = $id"; */
-
   try{
       //Get DB Object
       $db = new db();
