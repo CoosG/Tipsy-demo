@@ -6,6 +6,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 require '../vendor/autoload.php';
 require '../src/config/db.php';
 
+
+
 $app = new \Slim\App;
 
 $app->get('/hello/{name}', function (Request $request, Response $response) {
@@ -16,7 +18,5 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 
 //Customer Routes
 require '../src/routes/user.php';
-//General requests routes
-require '../src/routes/general.php';
 
 $app->run();
