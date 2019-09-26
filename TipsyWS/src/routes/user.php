@@ -4,10 +4,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $app = new \Slim\App;
 
-/*$app->get('/api/user',function(Request $request, Response $response){
-  echo 'CUSTOMER';
-});*/
-
 //Get all users
 $app->get('/api/user', function (Request $request, Response $response) {
   $sql = "SELECT * FROM users";
@@ -216,6 +212,35 @@ $app->get('/api/user/avgtimevisit/{atime}/{dtime}/{lid}', function (Request $req
       $users = $stmt->fetchAll(PDO::FETCH_OBJ);
       $db = null;
       echo json_encode($users);
+
+  }catch(PDOException $e){
+      echo '{"error": {"text": '.$e->getMessage().'}';
+  }
+});
+
+// Add location record
+$app->post('/api/user/addlocation', function (Request $request, Response $response) {
+
+  $l_name = $request->getParam('l_name');
+  $l_password = $request->getParam('l_password');
+
+  $sql = "INSERT INTO `locations`(`l_name`, `l_password`) VALUES
+  (:l_name,:l_password)";
+
+  try{
+      //Get DB Object
+      $db = new db();
+      //Connect
+      $db = $db->connect();
+
+      $stmt = $db->prepare($sql);
+
+      $stmt->bindParam(':l_name', $l_name);
+      $stmt->bindParam(':l_password', $l_password);
+
+      $stmt->execute();
+
+      echo '{"notice": {"text": "Location Added"}}';
 
   }catch(PDOException $e){
       echo '{"error": {"text": '.$e->getMessage().'}';
