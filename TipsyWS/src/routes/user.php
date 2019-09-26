@@ -134,7 +134,7 @@ $app->put('/api/user/update/{id}', function (Request $request, Response $respons
   }
 });
 
-//Get Single User
+//Get Amount of visitors during certain times
 $app->get('/api/user/usersduringtime/{atime}/{dtime}/{lid}', function (Request $request, Response $response) {
 
   $atime = $request->getAttribute('atime');
@@ -144,6 +144,34 @@ $app->get('/api/user/usersduringtime/{atime}/{dtime}/{lid}', function (Request $
   $sql = "SELECT COUNT(DISTINCT u_id)
           FROM visit
           WHERE (v_atime BETWEEN '$atime' AND '$dtime') AND (l_id = $lid);";
+
+  try{
+      //Get DB Object
+      $db = new db();
+      //Connect
+      $db = $db->connect();
+
+      $stmt = $db->query($sql);
+      $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $db = null;
+      echo json_encode($users);
+
+  }catch(PDOException $e){
+      echo '{"error": {"text": '.$e->getMessage().'}';
+  }
+});
+
+//Get Average amount of time users spend at location during certain time frame
+$app->get('/api/user/avgtimevisit/{atime}/{dtime}/{lid}', function (Request $request, Response $response) {
+
+  $atime = $request->getAttribute('atime');
+  $dtime = $request->getAttribute('dtime');
+  $lid = $request->getAttribute('lid');
+
+  $sql = "SELECT ROUND(AVG(TIMESTAMPDIFF(MINUTE,v_atime,v_dtime))/60.0,2)
+          FROM visit
+          WHERE (v_atime BETWEEN '$atime' AND '$dtime') AND (l_id = $lid);";
+
 
   try{
       //Get DB Object
