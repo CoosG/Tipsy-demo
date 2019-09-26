@@ -134,6 +134,39 @@ $app->put('/api/user/update/{id}', function (Request $request, Response $respons
   }
 });
 
+// Add visit record
+$app->post('/api/user/addvisit', function (Request $request, Response $response) {
+
+  $u_id = $request->getParam('u_id');
+  $l_id = $request->getParam('l_id');
+  $v_atime = $request->getParam('v_atime');
+  $v_dtime = $request->getParam('v_dtime');
+
+  $sql = "INSERT INTO `visit`(`u_id`, `l_id`, `v_atime`, `v_dtime`) VALUES
+  (:u_id,:l_id,:v_atime,:v_dtime)";
+
+  try{
+      //Get DB Object
+      $db = new db();
+      //Connect
+      $db = $db->connect();
+
+      $stmt = $db->prepare($sql);
+
+      $stmt->bindParam(':u_id', $u_id);
+      $stmt->bindParam(':l_id', $l_id);
+      $stmt->bindParam(':v_atime', $v_atime);
+      $stmt->bindParam(':v_dtime', $v_dtime);
+
+      $stmt->execute();
+
+      echo '{"notice": {"text": "Visit Added"}}';
+
+  }catch(PDOException $e){
+      echo '{"error": {"text": '.$e->getMessage().'}';
+  }
+});
+
 //Get Amount of visitors during certain times
 $app->get('/api/user/usersduringtime/{atime}/{dtime}/{lid}', function (Request $request, Response $response) {
 
