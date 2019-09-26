@@ -55,13 +55,13 @@ $app->post('/api/user/add', function (Request $request, Response $response) {
 
   $first_name = $request->getParam('u_name');
   $last_name = $request->getParam('u_surname');
-  $firebase_id = $request->getParam('u_firebaseid');
+  $unique_id = $request->getParam('u_uniqueid');
   $u_password = $request->getParam('u_password');
   $email = $request->getParam('u_email');
   $dob = $request->getParam('u_dob');
 
-  $sql = "INSERT INTO `users`(`u_name`, `u_surname`, `u_firebaseid`, `u_password`, `u_email`, `u_dob`) VALUES
-  (:u_name,:u_surname,:u_firebaseid,:u_password,:u_email,:u_dob)";
+  $sql = "INSERT INTO `users`(`u_name`, `u_surname`, `u_uniqueid`, `u_password`, `u_email`, `u_dob`) VALUES
+  (:u_name,:u_surname,:u_uniqueid,:u_password,:u_email,:u_dob)";
 
   try{
       //Get DB Object
@@ -73,7 +73,7 @@ $app->post('/api/user/add', function (Request $request, Response $response) {
 
       $stmt->bindParam(':u_name', $first_name);
       $stmt->bindParam(':u_surname', $last_name);
-      $stmt->bindParam(':u_firebaseid', $firebase_id);
+      $stmt->bindParam(':u_uniqueid', $unique_id);
       $stmt->bindParam(':u_password', $u_password);
       $stmt->bindParam(':u_email', $email);
       $stmt->bindParam(':u_dob', $dob);
@@ -94,7 +94,7 @@ $app->put('/api/user/update/{id}', function (Request $request, Response $respons
   $id = $request->getAttribute('id');
   $first_name = $request->getParam('u_name');
   $last_name = $request->getParam('u_surname');
-  $firebase_id = $request->getParam('u_firebaseid');
+  $unique_id = $request->getParam('u_uniqueid');
   $u_password = $request->getParam('u_password');
   $email = $request->getParam('u_email');
   $dob = $request->getParam('u_dob');
@@ -103,7 +103,7 @@ $app->put('/api/user/update/{id}', function (Request $request, Response $respons
             `u_id`=:u_id,
             `u_name`=:u_name,
             `u_surname`=:u_surname,
-            `u_firebaseid`=:u_firebaseid,
+            `u_uniqueid`=:u_uniqueid,
             `u_password`=:u_password,
             `u_email`=:u_email,
             `u_dob`=:u_dob
@@ -120,7 +120,7 @@ $app->put('/api/user/update/{id}', function (Request $request, Response $respons
       $stmt->bindParam(':u_id', $id);
       $stmt->bindParam(':u_name', $first_name);
       $stmt->bindParam(':u_surname', $last_name);
-      $stmt->bindParam(':u_firebaseid', $firebase_id);
+      $stmt->bindParam(':u_uniqueid', $unique_id);
       $stmt->bindParam(':u_password', $u_password);
       $stmt->bindParam(':u_email', $email);
       $stmt->bindParam(':u_dob', $dob);
@@ -128,6 +128,33 @@ $app->put('/api/user/update/{id}', function (Request $request, Response $respons
       $stmt->execute();
 
       echo '{"notice": {"text": "User updated"}}';
+
+  }catch(PDOException $e){
+      echo '{"error": {"text": '.$e->getMessage().'}';
+  }
+});
+
+//Get Single User
+$app->get('/api/user/usersduringtime/{atime}/{dtime}/{lid}', function (Request $request, Response $response) {
+
+  $atime = $request->getAttribute('atime');
+  $dtime = $request->getAttribute('dtime');
+  $lid = $request->getAttribute('lid');
+
+  $sql = "SELECT COUNT(DISTINCT u_id)
+          FROM visit
+          WHERE (v_atime BETWEEN '$atime' AND '$dtime') AND (l_id = $lid);";
+
+  try{
+      //Get DB Object
+      $db = new db();
+      //Connect
+      $db = $db->connect();
+
+      $stmt = $db->query($sql);
+      $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $db = null;
+      echo json_encode($users);
 
   }catch(PDOException $e){
       echo '{"error": {"text": '.$e->getMessage().'}';

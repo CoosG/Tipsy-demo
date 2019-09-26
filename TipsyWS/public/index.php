@@ -16,7 +16,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
     return $response;
 });
 
-//Customer Routes
+//User Routes
 require '../src/routes/user.php';
 
 $app->run();
