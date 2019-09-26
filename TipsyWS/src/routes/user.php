@@ -246,3 +246,32 @@ $app->post('/api/user/addlocation', function (Request $request, Response $respon
       echo '{"error": {"text": '.$e->getMessage().'}';
   }
 });
+
+// Add relationship record
+$app->post('/api/user/addrelationship', function (Request $request, Response $response) {
+
+  $r_relatinguserid = $request->getParam('r_relatinguserid');
+  $r_relateduserid = $request->getParam('r_relateduserid');
+
+  $sql = "INSERT INTO `relationships`(`r_relatinguserid`, `r_relateduserid`) VALUES
+  (:r_relatinguserid,:r_relateduserid)";
+
+  try{
+      //Get DB Object
+      $db = new db();
+      //Connect
+      $db = $db->connect();
+
+      $stmt = $db->prepare($sql);
+
+      $stmt->bindParam(':r_relatinguserid', $r_relatinguserid);
+      $stmt->bindParam(':r_relateduserid', $r_relateduserid);
+
+      $stmt->execute();
+
+      echo '{"notice": {"text": "Relationship Added"}}';
+
+  }catch(PDOException $e){
+      echo '{"error": {"text": '.$e->getMessage().'}';
+  }
+});
