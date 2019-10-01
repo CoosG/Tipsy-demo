@@ -49,6 +49,10 @@ export class SchedulePage implements OnInit {
     });
   }
 
+  swipeEvent(event) {
+    this.router.navigateByUrl('../map/map.html');
+  }
+
   async presentFilter() {
     const modal = await this.modalCtrl.create({
       component: ScheduleFilterPage,
