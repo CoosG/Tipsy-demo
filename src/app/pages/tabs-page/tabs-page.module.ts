@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -22,7 +23,7 @@ import { VenueListModule } from '../venue-list/venue-list.module';
     SessionDetailModule,
     VenueDetailModule,
     VenueListModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
   ],
   declarations: [
     TabsPage,
