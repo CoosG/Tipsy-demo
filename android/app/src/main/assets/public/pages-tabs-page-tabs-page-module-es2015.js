@@ -62,7 +62,7 @@ module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"sta
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n\r\n    <ion-tab-button tab=\"camera\">\r\n      <ion-icon name=\"camera\"></ion-icon>\r\n      <ion-label>Camera</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"schedule\">\r\n      <ion-icon name=\"calendar\"></ion-icon>\r\n      <ion-label>Schedule</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"venues\">\r\n      <ion-icon name=\"beer\"></ion-icon>\r\n      <ion-label>Venues</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"map\">\r\n      <ion-icon name=\"map\"></ion-icon>\r\n      <ion-label>Map</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"about\">\r\n      <ion-icon name=\"information-circle\"></ion-icon>\r\n      <ion-label>About</ion-label>\r\n    </ion-tab-button>\r\n\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n"
+module.exports = "<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n\r\n      <ion-tab-button tab=\"camera\">\r\n          <ion-icon name=\"camera\"></ion-icon>\r\n          <ion-label>Camera</ion-label>\r\n        </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"schedule\">\r\n      <ion-icon name=\"calendar\"></ion-icon>\r\n      <ion-label>Schedule</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"venues\">\r\n      <ion-icon name=\"beer\"></ion-icon>\r\n      <ion-label>Venues</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"map\">\r\n      <ion-icon name=\"map\"></ion-icon>\r\n      <ion-label>Map</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"about\">\r\n      <ion-icon name=\"information-circle\"></ion-icon>\r\n      <ion-label>About</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n"
 
 /***/ }),
 
@@ -1160,7 +1160,7 @@ TabsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _session_detail_session_detail_module__WEBPACK_IMPORTED_MODULE_9__["SessionDetailModule"],
             _venue_detail_venue_detail_module__WEBPACK_IMPORTED_MODULE_10__["VenueDetailModule"],
             _venue_list_venue_list_module__WEBPACK_IMPORTED_MODULE_11__["VenueListModule"],
-            _tabs_page_routing_module__WEBPACK_IMPORTED_MODULE_5__["TabsPageRoutingModule"]
+            _tabs_page_routing_module__WEBPACK_IMPORTED_MODULE_5__["TabsPageRoutingModule"],
         ],
         declarations: [
             _tabs_page__WEBPACK_IMPORTED_MODULE_4__["TabsPage"],

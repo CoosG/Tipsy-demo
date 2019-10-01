@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plugins, CameraSource, CameraResultType } from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'camera',
@@ -10,17 +11,17 @@ export class CameraPage {
 
   image: any;
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
   async takePhoto() {
     const captureImage = await Plugins.Camera.getPhoto({
-      quality : 90,
-      allowEditing : true,
+      quality : 100,
+      allowEditing : false,
       source: CameraSource.Camera,
-      resultType: CameraResultType.Uri
+      resultType: CameraResultType.DataUrl
     });
 
-    this.image = captureImage.webPath;
+    this.image = this.sanitizer.bypassSecurityTrustResourceUrl(captureImage && (captureImage.dataUrl));
   }
 
 

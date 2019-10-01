@@ -435,21 +435,33 @@ module.exports = "<ion-app>\r\n  <ion-split-pane>\r\n\r\n    <ion-menu>\r\n     
   !*** ./src/$$_lazy_route_resource lazy namespace object ***!
   \**********************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncaught exception popping up in devtools
-	return Promise.resolve().then(function() {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
+var map = {
+	"./pages/camera/camera.module": [
+		"./src/app/pages/camera/camera.module.ts",
+		"camera-camera-module"
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(id);
 	});
 }
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
+module.exports = webpackAsyncContext;
 
 /***/ }),
 
@@ -502,7 +514,7 @@ const routes = [
         loadChildren: () => __webpack_require__.e(/*! import() | pages-tutorial-tutorial-module */ "pages-tutorial-tutorial-module").then(__webpack_require__.bind(null, /*! ./pages/tutorial/tutorial.module */ "./src/app/pages/tutorial/tutorial.module.ts")).then(m => m.TutorialModule),
         canLoad: [_providers_check_tutorial_service__WEBPACK_IMPORTED_MODULE_3__["CheckTutorial"]]
     },
-    { path: 'camera', loadChildren: () => __webpack_require__.e(/*! import() | pages-camera-camera-module */ "camera-camera-module").then(__webpack_require__.bind(null, /*! ./pages/camera/camera.module */ "./src/app/pages/camera/camera.module.ts")).then(m => m.CameraPageModule) }
+    { path: 'camera', loadChildren: './pages/camera/camera.module#CameraPageModule' }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -570,14 +582,19 @@ let AppComponent = class AppComponent {
         this.toastCtrl = toastCtrl;
         this.appPages = [
             {
+                title: 'Camera',
+                url: '/app/tabs/camera',
+                icon: 'camera'
+            },
+            {
                 title: 'Schedule',
                 url: '/app/tabs/schedule',
                 icon: 'calendar'
             },
             {
-                title: 'Speakers',
-                url: '/app/tabs/speakers',
-                icon: 'contacts'
+                title: 'Venues',
+                url: '/app/tabs/venues',
+                icon: 'beer'
             },
             {
                 title: 'Map',
@@ -708,14 +725,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/fesm2015/service-worker.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
-/* harmony import */ var _ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/Camera/ngx */ "./node_modules/@ionic-native/Camera/ngx/index.js");
-/* harmony import */ var _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/File/ngx */ "./node_modules/@ionic-native/File/ngx/index.js");
-/* harmony import */ var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/file-path/ngx */ "./node_modules/@ionic-native/file-path/ngx/index.js");
-
-
-
-
 
 
 
@@ -739,10 +748,6 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClientModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["IonicModule"].forRoot(),
             _ionic_storage__WEBPACK_IMPORTED_MODULE_8__["IonicStorageModule"].forRoot(),
-            _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_13__["WebView"],
-            _ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_14__["Camera"],
-            _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_15__["File"],
-            _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_16__["FilePath"],
             _angular_service_worker__WEBPACK_IMPORTED_MODULE_11__["ServiceWorkerModule"].register('ngsw-worker.js', {
                 enabled: _environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].production
             })

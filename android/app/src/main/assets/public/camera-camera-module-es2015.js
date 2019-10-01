@@ -2521,7 +2521,7 @@ var Toast = new ToastPluginWeb();
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Camera</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n<img [src]=\"image\">\n<button ion-button (click)=\"takePhoto()\"> Capture!</button>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Camera</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n<img [src]=\"image\">\n<ion-fab vertical=\"bottom\" horizontal=\"center\" slot=\"fixed\">\n<ion-fab-button (click)=\"takePhoto()\">\n<ion-icon name=\"camera\"></ion-icon>\n</ion-fab-button>\n</ion-fab>\n</ion-content>\n"
 
 /***/ }),
 
@@ -2597,30 +2597,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/core */ "./node_modules/@capacitor/core/dist/esm/index.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+
 
 
 
 let CameraPage = class CameraPage {
-    constructor() { }
+    constructor(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
     takePhoto() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const captureImage = yield _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["Plugins"].Camera.getPhoto({
-                quality: 90,
-                allowEditing: true,
+                quality: 100,
+                allowEditing: false,
                 source: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["CameraSource"].Camera,
-                resultType: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["CameraResultType"].Uri
+                resultType: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["CameraResultType"].DataUrl
             });
-            this.image = captureImage.webPath;
+            this.image = this.sanitizer.bypassSecurityTrustResourceUrl(captureImage && (captureImage.dataUrl));
         });
     }
 };
+CameraPage.ctorParameters = () => [
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"] }
+];
 CameraPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'camera',
         template: __webpack_require__(/*! raw-loader!./camera.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/camera/camera.page.html"),
         styles: [__webpack_require__(/*! ./camera.page.scss */ "./src/app/pages/camera/camera.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"]])
 ], CameraPage);
 
 

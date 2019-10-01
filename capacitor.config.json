@@ -1,6 +1,6 @@
 {
-  "appId": "com.tipsyDemo",
-  "appName": "Tipsy-demo",
+  "appId": "io.ionic.starter",
+  "appName": "ionic-conference-app",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www"
