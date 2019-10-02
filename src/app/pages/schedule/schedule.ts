@@ -30,7 +30,7 @@ export class SchedulePage implements OnInit {
     public modalCtrl: ModalController,
     public router: Router,
     public toastCtrl: ToastController,
-    public user: UserData
+    public user: UserData,
   ) { }
 
   ngOnInit() {
@@ -47,6 +47,10 @@ export class SchedulePage implements OnInit {
       this.shownSessions = data.shownSessions;
       this.groups = data.groups;
     });
+  }
+
+  swipeEvent(event) {
+    this.router.navigateByUrl('../map/map.html');
   }
 
   async presentFilter() {
