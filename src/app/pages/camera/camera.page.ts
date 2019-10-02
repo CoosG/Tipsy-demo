@@ -9,13 +9,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class CameraPage {
 
-  image: any;
 
-  constructor(private sanitizer: DomSanitizer) { }
-
-
-    this.image = this.sanitizer.bypassSecurityTrustResourceUrl(captureImage && (captureImage.dataUrl));
-  }
-
+  constructor() { }
 
 }

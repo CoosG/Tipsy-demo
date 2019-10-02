@@ -2618,7 +2618,7 @@ var CameraPage = /** @class */ (function () {
                             quality: 100,
                             allowEditing: false,
                             source: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["CameraSource"].Camera,
-                            resultType: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["CameraResultType"].DataUrl
+                            resultType: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["CameraResultType"].Uri
                         })];
                     case 1:
                         captureImage = _a.sent();
