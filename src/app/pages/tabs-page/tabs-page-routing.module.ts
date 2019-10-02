@@ -43,7 +43,7 @@ const routes: Routes = [
             loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
           },
           {
-            path: 'venue-details/:venueId',
+            path: 'venue-details/:id',
             loadChildren: () => import('../venue-detail/venue-detail.module').then(m => m.VenueDetailModule)
           }
         ]
