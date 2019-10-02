@@ -13,13 +13,6 @@ export class CameraPage {
 
   constructor(private sanitizer: DomSanitizer) { }
 
-  async takePhoto() {
-    const captureImage = await Plugins.Camera.getPhoto({
-      quality : 100,
-      allowEditing : false,
-      source: CameraSource.Camera,
-      resultType: CameraResultType.DataUrl
-    });
 
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(captureImage && (captureImage.dataUrl));
   }
