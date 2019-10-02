@@ -15,7 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./signup.scss'],
 })
 export class SignupPage implements OnInit {
-  // signup: UserOptions = { username: '', password: '' };
+  signup: UserOptions = { username: '', password: '' };
   submitted = false;
   username = '';
   password = '';
@@ -27,7 +27,7 @@ export class SignupPage implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
-    // public userData: UserData
+    public userData: UserData
   ) {}
 
   async onSignup(form: NgForm) {
@@ -46,7 +46,7 @@ export class SignupPage implements OnInit {
     this.submitted = true;
 
     if (form.valid) {
-      // this.userData.signup(this.signup.username);
+      this.userData.signup(this.signup.username);
       this.router.navigateByUrl('/app/tabs/schedule');
     }
   }

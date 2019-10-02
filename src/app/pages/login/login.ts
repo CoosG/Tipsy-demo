@@ -18,7 +18,7 @@ import { HttpBackend } from '@angular/common/http';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage implements OnInit {
-  // login: UserOptions = { username: '', password: '' };
+  login: UserOptions = { username: '', password: '' };
   submitted = false;
 
   username = '';
@@ -30,35 +30,35 @@ export class LoginPage implements OnInit {
     public router: Router
   ) { }
 
-  // onLogin(form: NgForm) {
-  //   this.submitted = true;
+  onLogin(form: NgForm) {
+    this.submitted = true;
 
-  //   if (form.valid) {
-  //     this.userData.login(this.login.username);
-  //     this.router.navigateByUrl('/app/tabs/schedule');
-  //   }
-  // }
+    if (form.valid) {
+      this.userData.login(this.login.username);
+      this.router.navigateByUrl('/app/tabs/schedule');
+    }
+  }
 
   ngOnInit() {
   }
 
-  async Login(form: NgForm) {
-    const { username, password } = this;
-    try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@hack.com' , password);
-      this.submitted = true;
+  // async Login(form: NgForm) {
+  //   const { username, password } = this;
+  //   try {
+  //     const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@hack.com' , password);
+  //     this.submitted = true;
 
-      if (form.valid) {
-        this.router.navigateByUrl('/app/tabs/schedule');
-      }
+  //     if (form.valid) {
+  //       this.router.navigateByUrl('/app/tabs/schedule');
+  //     }
 
-    } catch (err) {
-      console.dir(err);
-      if (err.code === 'auth/user-not-found') {
-        console.log('User not found');
-      }
-    }
-  }
+  //   } catch (err) {
+  //     console.dir(err);
+  //     if (err.code === 'auth/user-not-found') {
+  //       console.log('User not found');
+  //     }
+  //   }
+  // }
 
   onSignup() {
     this.router.navigateByUrl('/signup');
