@@ -1,0 +1,11 @@
+async login() {
+    const{username, password} = this;
+    try {
+      const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@codedamn.com', password);
+    } catch (err) {
+      console.dir(err);
+      if (err.code === 'auth/user-not-found') {
+        console.log('User not found');
+      }
+    }
+  }
