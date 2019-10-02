@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+import { AlertController, IonList, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
+import { User, FirebaseService } from '../../providers/firebase.service';
+import { Observable } from 'rxjs';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'camera',
@@ -9,21 +12,25 @@ import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
   styleUrls: ['./camera.page.scss'],
 })
 export class CameraPage implements OnInit {
-  image: SafeResourceUrl;
+  image: any;
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(
+    private firebaseservice: FirebaseService,
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private iab: InAppBrowser
+  ) { }
 
   async takePhoto() {
-    const { Camera } = Plugins;
 
-    const result = await Camera.getPhoto({
+    const result = await Plugins.Camera.getPhoto({
       quality: 75,
       allowEditing: true,
       source: CameraSource.Camera,
-      resultType: CameraResultType.Base64 // either Base64 or uri (Bace64 is bad for production and performance)
+      resultType: CameraResultType.Uri // either Base64 or uri (Bace64 is bad for production and performance)
     });
 
-    this.image = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.dataUrl);
+    this.image = result.webPath ; // this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.dataUrl);
   }
 
   ngOnInit() {
