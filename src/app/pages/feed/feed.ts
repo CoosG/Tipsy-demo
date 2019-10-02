@@ -2,18 +2,18 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, LoadingController, ModalController, ToastController } from '@ionic/angular';
 
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { FeedFilterPage } from '../feed-filter/feed-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 
 @Component({
-  selector: 'page-schedule',
-  templateUrl: 'schedule.html',
-  styleUrls: ['./schedule.scss'],
+  selector: 'page-feed',
+  templateUrl: 'feed.html',
+  styleUrls: ['./feed.scss'],
 })
-export class SchedulePage implements OnInit {
+export class FeedPage implements OnInit {
   // Gets a reference to the list element
-  @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+  @ViewChild('feedList', { static: true }) feedList: IonList;
 
   dayIndex = 0;
   queryText = '';
@@ -34,13 +34,13 @@ export class SchedulePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.updateSchedule();
+    this.updateFeed();
   }
 
-  updateSchedule() {
-    // Close any open sliding items when the schedule updates
-    if (this.scheduleList) {
-      this.scheduleList.closeSlidingItems();
+  updateFeed() {
+    // Close any open sliding items when the feed updates
+    if (this.feedList) {
+      this.feedList.closeSlidingItems();
     }
 
     this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
@@ -55,7 +55,7 @@ export class SchedulePage implements OnInit {
 
   async presentFilter() {
     const modal = await this.modalCtrl.create({
-      component: ScheduleFilterPage,
+      component: FeedFilterPage,
       componentProps: { excludedTracks: this.excludeTracks }
     });
     await modal.present();
@@ -63,7 +63,7 @@ export class SchedulePage implements OnInit {
     const { data } = await modal.onWillDismiss();
     if (data) {
       this.excludeTracks = data;
-      this.updateSchedule();
+      this.updateFeed();
     }
   }
 
@@ -111,7 +111,7 @@ export class SchedulePage implements OnInit {
           handler: () => {
             // they want to remove this session from their favorites
             this.user.removeFavorite(sessionData.name);
-            this.updateSchedule();
+            this.updateFeed();
 
             // close the sliding item and hide the option buttons
             slidingItem.close();

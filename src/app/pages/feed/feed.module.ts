@@ -3,23 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { SchedulePage } from './schedule';
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
-import { SchedulePageRoutingModule } from './schedule-routing.module';
+import { FeedPage } from './feed';
+import { FeedFilterPage } from '../feed-filter/feed-filter';
+import { FeedPageRoutingModule } from './feed-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SchedulePageRoutingModule
+    FeedPageRoutingModule
   ],
   declarations: [
-    SchedulePage,
-    ScheduleFilterPage
+    FeedPage,
+    FeedFilterPage
   ],
   entryComponents: [
-    ScheduleFilterPage
+    FeedFilterPage
   ]
 })
-export class ScheduleModule { }
+export class FeedModule { }

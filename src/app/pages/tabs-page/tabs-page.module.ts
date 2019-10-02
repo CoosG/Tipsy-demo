@@ -7,7 +7,7 @@ import { TabsPageRoutingModule } from './tabs-page-routing.module';
 
 import { AboutModule } from '../about/about.module';
 import { MapModule } from '../map/map.module';
-import { ScheduleModule } from '../schedule/schedule.module';
+import { FeedModule } from '../feed/feed.module';
 import { SessionDetailModule } from '../session-detail/session-detail.module';
 import { VenueDetailModule } from '../venue-detail/venue-detail.module';
 import { VenueListModule } from '../venue-list/venue-list.module';
@@ -18,7 +18,7 @@ import { VenueListModule } from '../venue-list/venue-list.module';
     CommonModule,
     IonicModule,
     MapModule,
-    ScheduleModule,
+    FeedModule,
     SessionDetailModule,
     VenueDetailModule,
     VenueListModule,

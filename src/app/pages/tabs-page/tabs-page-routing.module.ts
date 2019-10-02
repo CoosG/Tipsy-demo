@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs-page';
-import { SchedulePage } from '../schedule/schedule';
+import { FeedPage } from '../feed/feed';
 
 
 const routes: Routes = [
@@ -19,11 +19,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'schedule',
+        path: 'feed',
         children: [
           {
             path: '',
-            component: SchedulePage,
+            component: FeedPage,
           },
           {
             path: 'session/:sessionId',
@@ -38,10 +38,10 @@ const routes: Routes = [
             path: '',
             loadChildren: () => import('../venue-list/venue-list.module').then(m => m.VenueListModule)
           },
-          {
+         /* {
             path: 'session/:sessionId',
             loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-          },
+          },*/
           {
             path: 'venue-details/:id',
             loadChildren: () => import('../venue-detail/venue-detail.module').then(m => m.VenueDetailModule)
@@ -68,7 +68,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/app/tabs/schedule',
+        redirectTo: '/app/tabs/feed',
         pathMatch: 'full'
       }
     ]

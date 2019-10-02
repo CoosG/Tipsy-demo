@@ -5,11 +5,11 @@ import { ConferenceData } from '../../providers/conference-data';
 
 
 @Component({
-  selector: 'page-schedule-filter',
-  templateUrl: 'schedule-filter.html',
-  styleUrls: ['./schedule-filter.scss'],
+  selector: 'page-feed-filter',
+  templateUrl: 'feed-filter.html',
+  styleUrls: ['./feed-filter.scss'],
 })
-export class ScheduleFilterPage implements AfterViewInit {
+export class FeedFilterPage implements AfterViewInit {
   ios: boolean;
 
   tracks: {name: string, icon: string, isChecked: boolean}[] = [];
