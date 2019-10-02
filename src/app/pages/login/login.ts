@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,24 +15,29 @@ import { UserOptions } from '../../interfaces/user-options';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
   submitted = false;
-
+  username: string;
+  password: string;
   constructor(
+    //public afAuth: AngularFireAuth,
     public userData: UserData,
-    public router: Router
+    public router: Router,
+
   ) { }
 
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
+async login() {
+    const{username, password} = this;
+    try {
+      //const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@codedamn.com', password);
+    } catch (err) {
+      console.dir(err);
+      if (err.code === 'auth/user-not-found') {
+        console.log('User not found');
+      }
     }
   }
 
-  onSignup() {
+onSignup() {
     this.router.navigateByUrl('/signup');
   }
 }
