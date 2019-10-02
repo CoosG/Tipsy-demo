@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { RouteReuseStrategy } from '@angular/router';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { RouteReuseStrategy } from '@angular/router';
     StatusBar,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: FirestoreSettingsToken, useValue: {} },
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })

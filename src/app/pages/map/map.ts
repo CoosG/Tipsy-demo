@@ -2,7 +2,9 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ConferenceData } from '../../providers/conference-data';
 import { Platform } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
-const { Geolocation } = Plugins;
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+declare var google;
 
 @Component({
   selector: 'page-map',
@@ -10,9 +12,46 @@ const { Geolocation } = Plugins;
   styleUrls: ['./map.scss']
 })
 export class MapPage implements AfterViewInit {
+  map: any;
+  marker: any;
+  latitude: any = '';
+  longitude: any = '';
+  timestamp: any = '';
+
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
-  constructor(public confData: ConferenceData, public platform: Platform) {}
+  constructor(public confData: ConferenceData, public platform: Platform, public geolocation: Geolocation ) {
+    // this.platform.ready().then(() => {
+    //   const mapOptions = {
+    //     center: {lat: 23.2366, lng: 79.3822},
+    //     zoom: 7
+    //   };
+    //   this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    //   this.GetLocation();
+    // });
+  }
+
+    // GetLocation() {
+    //   const ref = this;
+    //   const watch = this.geolocation.watchPosition();
+    //   watch.subscribe((position) => {
+    //     const gps = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    //     if (ref.marker == null) {
+    //       ref.marker = new google.maps.Marker({
+    //         position: gps,
+    //         map: ref.map,
+    //         title: 'my position'
+    //       });
+    //     } else {
+    //       ref.marker.setPosition(gps);
+
+    //     }
+    //     ref.map.panTo(gps);
+    //     ref.latitude = position.coords.latitude.toString();
+    //     ref.longitude = position.coords.latitude.toString();
+    //     ref.timestamp = (new Date(position.timestamp)).toString();
+    //   });
+    // }
 
   async ngAfterViewInit() {
     const googleMaps = await getGoogleMaps(

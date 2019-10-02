@@ -10,6 +10,15 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'camera',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../camera/camera.module').then(m => m.CameraPageModule)
+          }
+        ]
+      },
+      {
         path: 'schedule',
         children: [
           {
