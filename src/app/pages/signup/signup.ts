@@ -49,5 +49,6 @@ export class SignupPage implements OnInit {
       this.userData.signup(this.signup.username);
       this.router.navigateByUrl('/app/tabs/schedule');
     }
+    // test
   }
 }
