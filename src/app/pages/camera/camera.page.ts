@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 import { AlertController, IonList, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { User, FirebaseService } from '../../providers/firebase.service';
@@ -12,6 +13,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   styleUrls: ['./camera.page.scss'],
 })
 export class CameraPage implements OnInit {
+
   image: any;
 
   constructor(

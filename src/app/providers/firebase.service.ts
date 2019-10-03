@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 'angularfire2/firestore';
+
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
@@ -11,6 +12,7 @@ export interface Venue {
   name: string;
   desc: string;
 }
+
 
 export interface User {
   id?: string;
@@ -29,6 +31,7 @@ export interface User {
 export class FirebaseService {
   private venuesCollection: AngularFirestoreCollection<Venue>;
   private venues: Observable<Venue[]>;
+
 
   constructor(private db: AngularFirestore, private fdb: AngularFireDatabase, private afStorage: AngularFireStorage) {
     this.venuesCollection = this.db.collection<Venue>('registeredVenues');
