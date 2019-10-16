@@ -30,7 +30,7 @@ export class SchedulePage implements OnInit {
     public modalCtrl: ModalController,
     public router: Router,
     public toastCtrl: ToastController,
-    public user: UserData
+    public user: UserData,
   ) { }
 
   ngOnInit() {

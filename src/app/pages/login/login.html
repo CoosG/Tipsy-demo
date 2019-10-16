@@ -13,7 +13,42 @@
     <img src="assets/img/person.jpg" alt="Person logo">
   </div>
 
- <ion-list>
+
+  <form #loginForm="ngForm" novalidate>
+      <!-- <ion-list>
+          <ion-item>
+            <ion-label position="stacked" color="primary">Username</ion-label>
+            <ion-input [(ngModel)]="username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+              required>
+            </ion-input>
+          </ion-item>
+
+          <ion-text color="danger">
+            <p [hidden]="username.valid == false" class="ion-padding-start">
+              Username is required
+            </p>
+          </ion-text>
+
+          <ion-item>
+            <ion-label position="stacked" color="primary">Password</ion-label>
+            <ion-input [(ngModel)]="password" name="password" type="password" #password="ngModel" required>
+            </ion-input>
+          </ion-item>
+
+          <ion-text color="danger">
+            <p [hidden]="password.valid == false" class="ion-padding-start">
+              Password is required
+            </p>
+          </ion-text>
+        </ion-list> -->
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Username</ion-label>
+        <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+
 
     <ion-item>
       <ion-label position="floating">Username</ion-label>

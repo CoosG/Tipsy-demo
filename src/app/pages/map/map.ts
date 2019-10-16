@@ -21,14 +21,15 @@ export class MapPage implements AfterViewInit {
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
   constructor(public confData: ConferenceData, public platform: Platform, public geolocation: Geolocation ) {
-   //  this.platform.ready().then(() => {
+
+    // this.platform.ready().then(() => {
     //   const mapOptions = {
-    //     center: {lat: -26.694248, lng: 27.093627},
+    //     center: {lat: 23.2366, lng: 79.3822},
     //     zoom: 7
     //   };
     //   this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      //this.GetLocation();
-   //  });
+    //   this.GetLocation();
+    // });
   }
 
     // GetLocation() {
