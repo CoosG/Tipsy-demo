@@ -1,6 +1,16 @@
 .tabbar {
   justify-content: center;
+  ion-icon {
+    color: var(--ion-color-tertiary);
+  }
 }
+.active {
+  color: var(--ion-color-tertiary);
+  ion-icon {
+    color: var(--ion-color-tertiary);
+  }
+}
+
 
 .tab-button {
   max-width: 200px;
