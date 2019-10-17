@@ -20,6 +20,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { RouteReuseStrategy } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { MediaCapture } from '@ionic-native/media-capture/ngx';
+import { Media} from '@ionic-native/media/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
   imports: [
@@ -44,7 +47,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     StatusBar,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: FirestoreSettingsToken, useValue: {} },
-    Geolocation
+    Geolocation,
+    MediaCapture,
+    Media,
+    File
   ],
   bootstrap: [AppComponent]
 })
