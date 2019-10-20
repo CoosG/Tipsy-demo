@@ -21,6 +21,7 @@ export class MapPage implements AfterViewInit {
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
   constructor(public confData: ConferenceData, public platform: Platform, public geolocation: Geolocation ) {
+
     // this.platform.ready().then(() => {
     //   const mapOptions = {
     //     center: {lat: 23.2366, lng: 79.3822},

@@ -16,6 +16,7 @@ const MEDIA_FILES_KEY = 'mediaFiles';
 })
 
 export class CameraPage implements OnInit {
+
   image: any;
   mediaFiles = [];
 

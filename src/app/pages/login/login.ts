@@ -1,4 +1,6 @@
+
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -17,6 +19,7 @@ import { HttpBackend } from '@angular/common/http';
   templateUrl: 'login.html',
   styleUrls: ['./login.scss'],
 })
+
 export class LoginPage implements OnInit {
   login: UserOptions = { username: '', password: '' };
   submitted = false;
@@ -27,17 +30,22 @@ export class LoginPage implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     public userData: UserData,
-    public router: Router
+    public router: Router,
+
   ) { }
 
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
+async login() {
+    const{username, password} = this;
+    try {
+      //const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@codedamn.com', password);
+    } catch (err) {
+      console.dir(err);
+      if (err.code === 'auth/user-not-found') {
+        console.log('User not found');
+      }
     }
   }
+
 
   ngOnInit() {
   }
