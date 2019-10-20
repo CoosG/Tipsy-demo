@@ -53,6 +53,10 @@ export class SchedulePage implements OnInit {
     this.router.navigateByUrl('../map/map.html');
   }
 
+  navigateProfile() {
+    this.router.navigateByUrl('../profile');
+  }
+
   async presentFilter() {
     const modal = await this.modalCtrl.create({
       component: ScheduleFilterPage,

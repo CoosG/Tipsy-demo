@@ -11,10 +11,11 @@ import { ScheduleModule } from '../schedule/schedule.module';
 import { SessionDetailModule } from '../session-detail/session-detail.module';
 import { VenueDetailModule } from '../venue-detail/venue-detail.module';
 import { VenueListModule } from '../venue-list/venue-list.module';
+import { ProfilePageModule } from './../profile/profile.module';
 
 @NgModule({
   imports: [
-    AboutModule,
+  AboutModule,
     CommonModule,
     IonicModule,
     MapModule,
@@ -22,6 +23,7 @@ import { VenueListModule } from '../venue-list/venue-list.module';
     SessionDetailModule,
     VenueDetailModule,
     VenueListModule,
+    ProfilePageModule,
     TabsPageRoutingModule
   ],
   declarations: [
