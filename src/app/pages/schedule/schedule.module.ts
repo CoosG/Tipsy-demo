@@ -9,14 +9,14 @@ import { SchedulePageRoutingModule } from './schedule-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule,
     IonicModule,
     SchedulePageRoutingModule
   ],
   declarations: [
     SchedulePage,
-    ScheduleFilterPage
+    ScheduleFilterPage,
   ],
   entryComponents: [
     ScheduleFilterPage

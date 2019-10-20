@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs-page';
 import { SchedulePage } from '../schedule/schedule';
+import { ProfilePage } from '../profile/profile.page';
 
 
 const routes: Routes = [
@@ -28,7 +29,11 @@ const routes: Routes = [
           {
             path: 'session/:sessionId',
             loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-          }
+          },
+          {
+            path: 'profile',
+            component: ProfilePage,
+          },
         ]
       },
       {
@@ -72,7 +77,7 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
-  }
+  },
 ];
 
 @NgModule({

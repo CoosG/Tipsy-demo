@@ -11,7 +11,9 @@ def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
 
+  pod 'TeamhiveCapacitorVideoRecorder', :path => '..\..\node_modules\@teamhive\capacitor-video-recorder'
   pod 'CordovaPlugins', :path => '../capacitor-cordova-ios-plugins'
+  pod 'CordovaPluginsResources', :path => '../capacitor-cordova-ios-plugins'
 
   # Do not delete
 end
