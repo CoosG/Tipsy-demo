@@ -1,20 +1,38 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
-import { Platform } from '@ionic/angular';
+import { Component, ElementRef, ViewChild, AfterViewInit } from "@angular/core";
+import { ConferenceData } from "../../providers/conference-data";
+import { Platform } from "@ionic/angular";
+import { Plugins } from "@capacitor/core";
+import { Geolocation } from "@ionic-native/geolocation/ngx";
+
+declare var google;
 
 @Component({
-  selector: 'page-map',
-  templateUrl: 'map.html',
-  styleUrls: ['./map.scss']
+  selector: "page-map",
+  templateUrl: "map.html",
+  styleUrls: ["./map.scss"]
 })
 export class MapPage implements AfterViewInit {
-  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
+  map: any;
+  marker: any;
+  latitude: any = "";
+  longitude: any = "";
+  timestamp: any = "";
 
-  constructor(public confData: ConferenceData, public platform: Platform) {}
+  @ViewChild("mapCanvas", { static: true }) mapElement: ElementRef;
+
+  constructor(
+    public confData: ConferenceData,
+    public platform: Platform,
+    public geolocation: Geolocation
+  ) {}
+
+  goNext() {}
+
+  goPrevious() {}
 
   async ngAfterViewInit() {
     const googleMaps = await getGoogleMaps(
-      'AIzaSyDhw6nZUOc_n-CPB9kUcK8IJnPhKfh8Sew'
+      "AIzaSyDhw6nZUOc_n-CPB9kUcK8IJnPhKfh8Sew"
     );
     this.confData.getMap().subscribe((mapData: any) => {
       const mapEle = this.mapElement.nativeElement;
@@ -35,13 +53,13 @@ export class MapPage implements AfterViewInit {
           title: markerData.name
         });
 
-        marker.addListener('click', () => {
+        marker.addListener("click", () => {
           infoWindow.open(map, marker);
         });
       });
 
-      googleMaps.event.addListenerOnce(map, 'idle', () => {
-        mapEle.classList.add('show-map');
+      googleMaps.event.addListenerOnce(map, "idle", () => {
+        mapEle.classList.add("show-map");
       });
     });
   }
@@ -55,7 +73,7 @@ function getGoogleMaps(apiKey: string): Promise<any> {
   }
 
   return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.31`;
     script.async = true;
     script.defer = true;
@@ -65,7 +83,7 @@ function getGoogleMaps(apiKey: string): Promise<any> {
       if (googleModule2 && googleModule2.maps) {
         resolve(googleModule2.maps);
       } else {
-        reject('google maps not available');
+        reject("google maps not available");
       }
     };
   });

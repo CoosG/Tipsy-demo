@@ -1,37 +1,33 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, ViewEncapsulation, OnInit } from "@angular/core";
 
-import { UserData } from '../../providers/user-data';
+import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { auth } from "firebase/app";
 
-import { UserOptions } from '../../interfaces/user-options';
+import { UserData } from "../../providers/user-data";
 
-
+import { UserOptions } from "../../interfaces/user-options";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { HttpBackend } from "@angular/common/http";
 
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
-  styleUrls: ['./login.scss'],
+  selector: "page-login",
+  templateUrl: "login.html",
+  styleUrls: ["./login.scss"]
 })
-export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
+export class LoginPage implements OnInit {
   submitted = false;
 
   constructor(
+    public afAuth: AngularFireAuth,
     public userData: UserData,
     public router: Router
-  ) { }
+  ) {}
 
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
-    }
-  }
+  ngOnInit() {}
 
   onSignup() {
-    this.router.navigateByUrl('/signup');
+    this.router.navigateByUrl("/login");
   }
 }

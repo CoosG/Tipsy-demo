@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Tipsy-demo</string>
+    <string name="title_activity_main">Tipsy-demo</string>
+    <string name="package_name">com.tipsyDemo</string>
+    <string name="fileprovider_authority">com.tipsyDemo.fileprovider</string>
+    <string name="custom_url_scheme">com.tipsyDemo</string>
+</resources>

@@ -3,7 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Map</ion-title>
+    <ion-segment>
+      <ion-segment-button (click)="goNext()">
+        NEXT
+      </ion-segment-button>
+      <ion-segment-button (click)="goPrevious()">
+        PREVIOUS
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
