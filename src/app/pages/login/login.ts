@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { UserData } from '../../providers/user-data';
-
+import { ConnectDatabaseService } from './../../uploads/shared/connect-database.service';
+import { Users } from '../../uploads/shared/users';
 
 
 
@@ -23,14 +23,28 @@ export class LoginPage implements OnInit {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public userData: UserData,
     public router: Router,
+    public connectDB: ConnectDatabaseService,
+    public user: Users
 
   ) { }
 
 async login() {
     try {
-      //const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@codedamn.com', password);
+      if (this.connectDB.returnUserData(this.username) === true) { // username exists
+        this.user = this.connectDB.userData;
+
+        if ( this.user.u_Password === this.password ) {
+          this.router.navigateByUrl('/app/tabs/schedule');
+          // add modal to welcome user
+          return;
+        }
+        console.log('Username and password does not match.');
+
+      } else {
+        console.log('Username does not exist.');
+      }
+
     } catch (err) {
       console.dir(err);
       if (err.code === 'auth/user-not-found') {
@@ -42,24 +56,6 @@ async login() {
 
   ngOnInit() {
   }
-
-  // async Login(form: NgForm) {
-  //   const { username, password } = this;
-  //   try {
-  //     const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@hack.com' , password);
-  //     this.submitted = true;
-
-  //     if (form.valid) {
-  //       this.router.navigateByUrl('/app/tabs/schedule');
-  //     }
-
-  //   } catch (err) {
-  //     console.dir(err);
-  //     if (err.code === 'auth/user-not-found') {
-  //       console.log('User not found');
-  //     }
-  //   }
-  // }
 
   onSignup() {
     this.router.navigateByUrl('/signup');

@@ -1,11 +1,11 @@
 export class Users {
-  $key = '';
-  uName = '';
-  uSurname = '';
-  uEmail = '';
-  uPassword = '';
-  uLongitude = '';
-  uLatitude = '';
+  u_id = '';
+  u_FirstName = '';
+  u_LastName = '';
+  u_Email = '';
+  u_Password = '';
+  u_Longitude = '';
+  u_Latitude = '';
 
   constructor() {}
 }
