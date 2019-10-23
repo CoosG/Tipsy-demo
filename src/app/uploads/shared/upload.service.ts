@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Upload } from './upload';
 import * as firebase from 'firebase';
@@ -8,7 +9,7 @@ import * as firebase from 'firebase';
 })
 export class UploadService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private httpC: HttpClient) { }
 
   private basePath = '/uploads';
   uploads: AngularFireList<Upload[]>;
@@ -16,6 +17,7 @@ export class UploadService {
   pushUpload(upload: Upload) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    // potch-map-1566554712889.appspot.com/uploads/4k-night-sky-wallpaper.jpg
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) =>  {
@@ -28,7 +30,10 @@ export class UploadService {
       },
       () => {
         // upload success
-        upload.url = uploadTask.snapshot.downloadURL;
+        storageRef.child(this.basePath + '/' + upload.file.name).getDownloadURL().then(res => {
+          upload.url = res;
+          console.log(upload.url);
+        });
         upload.name = upload.file.name;
         this.saveFileData(upload);
       }
@@ -38,6 +43,14 @@ export class UploadService {
   // Writes the file details to the realtime db
   private saveFileData(upload: Upload) {
     this.db.list(`${this.basePath}/`).push(upload);
+  }
+
+    // writes to armand db
+  private saveFileDataA(upload: Upload) {
+    this.httpC.post('http://tipsyws/api/user/addvideo',
+    '{"vid_furl": "' + upload.url + '",}').subscribe((res) => {
+      console.log(res);
+    }) ;
   }
 
 
