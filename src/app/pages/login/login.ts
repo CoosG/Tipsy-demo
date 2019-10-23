@@ -1,16 +1,11 @@
 
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 
 import { UserData } from '../../providers/user-data';
 
-import { UserOptions } from '../../interfaces/user-options';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { HttpBackend } from '@angular/common/http';
 
 
 
@@ -21,7 +16,6 @@ import { HttpBackend } from '@angular/common/http';
 })
 
 export class LoginPage implements OnInit {
-  login: UserOptions = { username: '', password: '' };
   submitted = false;
 
   username = '';
@@ -35,7 +29,6 @@ export class LoginPage implements OnInit {
   ) { }
 
 async login() {
-    const{username, password} = this;
     try {
       //const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@codedamn.com', password);
     } catch (err) {

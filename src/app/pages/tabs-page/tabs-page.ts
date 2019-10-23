@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonList, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
-import { User, FirebaseService } from '../../providers/firebase.service';
-import { Observable } from 'rxjs';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { MediaFile, CaptureError, CaptureVideoOptions } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
 import { MediaCapture } from '@ionic-native/media-capture/ngx';
+import { UploadService } from '../../uploads/shared/upload.service';
+import { Upload } from '../../uploads/shared/upload';
+import * as _ from 'lodash';
 
 const MEDIA_FILES_KEY = 'mediaFiles';
 
@@ -17,11 +16,15 @@ const MEDIA_FILES_KEY = 'mediaFiles';
 export class TabsPage implements OnInit {
   image: any;
   mediaFiles = [];
+  selectedFiles: FileList;
+  currentUpload: Upload;
+
 
   constructor(
     private mediaCapture: MediaCapture,
     private storage: Storage,
     private file: File,
+    private upSvc: UploadService
   ) {}
 
   async takePhoto() {
@@ -69,6 +72,25 @@ export class TabsPage implements OnInit {
       }
       this.mediaFiles = this.mediaFiles.concat(files);
     });
+  }
+
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  uploadSingle() {
+    const file = this.mediaFiles[0];
+    this.currentUpload = new Upload(file);
+    this.upSvc.pushUpload(this.currentUpload);
+  }
+
+  uploadMulti() {
+    const files = this.selectedFiles;
+    const filesIndex = _.range(files.length);
+    _.each(filesIndex, (idx) => {
+      this.currentUpload = new Upload(files[idx]);
+      this.upSvc.pushUpload(this.currentUpload); }
+    );
   }
 
   ngOnInit() {

@@ -1,0 +1,7 @@
+service firebase.storage {
+  match /b/potch-map-1566554712889.appspot.com/o {
+    match /potch-map-1566554712889.appspot.com {
+      allow read, write;
+    }
+  }
+}
