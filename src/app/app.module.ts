@@ -24,6 +24,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { Media} from '@ionic-native/media/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { Users } from './uploads/shared/users';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { File } from '@ionic-native/file/ngx';
     Geolocation,
     MediaCapture,
     Media,
-    File
+    File,
+    Users
   ],
   bootstrap: [AppComponent]
 })
