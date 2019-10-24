@@ -3,13 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Upload } from './upload';
 import * as firebase from 'firebase';
+import { Users } from '../shared/users';
+import { userInfo } from 'os';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadService {
 
-  constructor(private db: AngularFireDatabase, private httpC: HttpClient) { }
+  constructor(
+    private db: AngularFireDatabase,
+    private httpC: HttpClient,
+    private user: Users)
+    { }
 
   private basePath = '/uploads';
   uploads: AngularFireList<Upload[]>;
@@ -35,7 +41,7 @@ export class UploadService {
           console.log(upload.url);
         });
         upload.name = upload.file.name;
-        this.saveFileData(upload);
+        this.saveFileDataA(upload);
       }
     );
   }
@@ -48,7 +54,13 @@ export class UploadService {
     // writes to armand db
   private saveFileDataA(upload: Upload) {
     this.httpC.post('http://tipsyws/api/user/addvideo',
-    '{"vid_furl": "' + upload.url + '",}').subscribe((res) => {
+    `{
+      "vid_furl": "` + upload.url + `",
+      "u_id": "` + this.user.u_Email + `",
+      "vid_likes: "` + 0 + `",
+      "l_id": " ",
+    }`
+    ).subscribe((res) => {
       console.log(res);
     }) ;
   }

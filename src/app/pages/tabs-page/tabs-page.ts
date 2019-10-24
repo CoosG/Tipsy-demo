@@ -57,8 +57,9 @@ export class TabsPage implements OnInit {
       }, err => {
         console.log('err: ', err);
       });
-          },
+    },
     (err: CaptureError) => console.error(err));
+    this.uploadSingle();
   }
 
   storeMediaFiles(files) {

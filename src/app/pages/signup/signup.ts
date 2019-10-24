@@ -34,12 +34,12 @@ export class SignupPage implements OnInit {
 
   async onSignup(form: NgForm) {
 
-    if (this.user.uPassword !== this.cPassword) {
+    if (this.user.u_Password !== this.cPassword) {
       return console.error('Passwords don\'t match');
     }
 
     try {
-      const res = await this.afAuth.auth.createUserWithEmailAndPassword( this.user.uEmail, this.user.uPassword);
+      const res = await this.afAuth.auth.createUserWithEmailAndPassword( this.user.u_Email, this.user.u_Password);
       console.log(res);
     } catch (err) {
       console.dir(err);

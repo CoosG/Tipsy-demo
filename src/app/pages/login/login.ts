@@ -4,8 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { UserData } from '../../providers/user-data';
-
+import { ConnectDatabaseService } from './../../uploads/shared/connect-database.service';
+import { Users } from '../../uploads/shared/users';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -16,52 +17,41 @@ import { UserData } from '../../providers/user-data';
 })
 
 export class LoginPage implements OnInit {
-  submitted = false;
 
+  submitted = false;
   username = '';
   password = '';
-
-  constructor(
-    public afAuth: AngularFireAuth,
-    public userData: UserData,
-    public router: Router,
-
-  ) { }
-
-async login() {
-    try {
-      //const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@codedamn.com', password);
-    } catch (err) {
-      console.dir(err);
-      if (err.code === 'auth/user-not-found') {
-        console.log('User not found');
-      }
-    }
-  }
-
 
   ngOnInit() {
   }
 
-  // async Login(form: NgForm) {
-  //   const { username, password } = this;
-  //   try {
-  //     const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@hack.com' , password);
-  //     this.submitted = true;
+  constructor(
+    public afAuth: AngularFireAuth,
+    public router: Router,
+    public connectDB: ConnectDatabaseService,
+    public user: Users,
+    public httpC: HttpClient
 
-  //     if (form.valid) {
-  //       this.router.navigateByUrl('/app/tabs/schedule');
-  //     }
+  ) { }
 
-  //   } catch (err) {
-  //     console.dir(err);
-  //     if (err.code === 'auth/user-not-found') {
-  //       console.log('User not found');
-  //     }
-  //   }
-  // }
-
-  onSignup() {
-    this.router.navigateByUrl('/signup');
+  login() {
+    try {
+      this.httpC.get('http://tipsyws/api/user/' + this.username ).subscribe( (res) => {
+        console.log(res[0].u_FirstName, res[0].u_Email, res[0].u_LastName, res[0].u_Password);
+        if (res[0].u_Email === this.username) {
+          this.user.u_Email = res[0].u_Email;
+          this.user.u_FirstName = res[0].u_FirstName;
+          this.user.u_LastName = res[0].u_LastName;
+          this.user.u_Password = res[0].u_Password;
+          console.log('Found!', this.user.u_FirstName);
+          if (this.user.u_Password === this.password) {
+            console.log('Welcome' + this.user.u_FirstName);
+            this.router.navigateByUrl('/app/tabs/schedule');
+          } else {console.log('Password does not match'); }
+        }
+      });
+    } catch (err) {
+      console.log('User does not exist');
+    }
   }
 }
