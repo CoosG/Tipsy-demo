@@ -15,14 +15,44 @@
 
   <ion-list>
     <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
+      <ion-label position="stacked" color="primary">Username:</ion-label>
+      <ion-input
+        [(ngModel)]="user.u_Email"
+        name="username"
+        type="text"
+        #username="ngModel"
+        required
+      >
+      </ion-input>
     </ion-item>
+    <ion-text color="danger">
+      <p
+        [hidden]="username.valid || submitted == false"
+        class="ion-padding-start"
+      >
+        Username is required
+      </p>
+    </ion-text>
 
     <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-label position="stacked" color="primary">Password:</ion-label>
+      <ion-input
+        [(ngModel)]="user.u_Password"
+        name="password"
+        type="password"
+        #password="ngModel"
+        required
+      >
+      </ion-input>
     </ion-item>
+    <ion-text color="danger">
+      <p
+        [hidden]="password.valid || submitted == false"
+        class="ion-padding-start"
+      >
+        Password is required
+      </p>
+    </ion-text>
   </ion-list>
 
   <ion-row>
