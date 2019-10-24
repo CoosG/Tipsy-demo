@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { ConnectDatabaseService } from './../../uploads/shared/connect-database.service';
 import { Users } from '../../uploads/shared/users';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -16,48 +17,41 @@ import { Users } from '../../uploads/shared/users';
 })
 
 export class LoginPage implements OnInit {
-  submitted = false;
 
+  submitted = false;
   username = '';
   password = '';
+
+  ngOnInit() {
+  }
 
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
     public connectDB: ConnectDatabaseService,
-    public user: Users
+    public user: Users,
+    public httpC: HttpClient
 
   ) { }
 
-async login() {
+  login() {
     try {
-      if (this.connectDB.returnUserData(this.username) === true) { // username exists
-        this.user = this.connectDB.userData;
-
-        if ( this.user.u_Password === this.password ) {
-          this.router.navigateByUrl('/app/tabs/schedule');
-          // add modal to welcome user
-          return;
+      this.httpC.get('http://tipsyws/api/user/' + this.username ).subscribe( (res) => {
+        console.log(res[0].u_FirstName, res[0].u_Email, res[0].u_LastName, res[0].u_Password);
+        if (res[0].u_Email === this.username) {
+          this.user.u_Email = res[0].u_Email;
+          this.user.u_FirstName = res[0].u_FirstName;
+          this.user.u_LastName = res[0].u_LastName;
+          this.user.u_Password = res[0].u_Password;
+          console.log('Found!', this.user.u_FirstName);
+          if (this.user.u_Password === this.password) {
+            console.log('Welcome' + this.user.u_FirstName);
+            this.router.navigateByUrl('/app/tabs/schedule');
+          } else {console.log('Password does not match'); }
         }
-        console.log('Username and password does not match.');
-
-      } else {
-        console.log('Username does not exist.');
-      }
-
+      });
     } catch (err) {
-      console.dir(err);
-      if (err.code === 'auth/user-not-found') {
-        console.log('User not found');
-      }
+      console.log('User does not exist');
     }
-  }
-
-
-  ngOnInit() {
-  }
-
-  onSignup() {
-    this.router.navigateByUrl('/signup');
   }
 }
