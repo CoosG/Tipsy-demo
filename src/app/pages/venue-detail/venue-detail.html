@@ -10,7 +10,15 @@
 <ion-content class="venue-detail">
   <div *ngIf="venue" class="venue-detail">
     <ion-button fill="clear" size="large" color="facebook">
-      <ion-icon name="logo-facebook" slot="icon-only"></ion-icon>
+      <a href="https://www.facebook.com" target="blank">
+        <ion-icon name="logo-facebook" slot="icon-only"></ion-icon
+      ></a>
+    </ion-button>
+
+    <ion-button fill="clear" size="large" color="instagram">
+      <a href="https://www.instagram.com" target="blank"
+        ><ion-icon name="logo-instagram" slot="icon-only"></ion-icon
+      ></a>
     </ion-button>
   </div>
 </ion-content>
