@@ -4,13 +4,13 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Login</ion-title>
+    <ion-title>Login Party animals!</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <div class="login-logo">
-    <img src="assets/img/person.jpg" alt="Person logo">
+    <img src="assets/img/person.jpg" alt="Person logo" />
   </div>
 
   <ion-list>
@@ -21,16 +21,20 @@
 
     <ion-item>
       <ion-label position="floating">Password</ion-label>
-      <ion-input type=password [(ngModel)]="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
   </ion-list>
 
   <ion-row>
-      <ion-col>
-        <ion-button fill="outline" expand="block" size="default" color="primary" (click)="login()">Login</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button fill="outline" expand="block" size="default" color="primary" (click)="onSignup()">Signup</ion-button>
-      </ion-col>
-    </ion-row>
+    <ion-col>
+      <ion-button
+        fill="outline"
+        expand="block"
+        size="default"
+        color="primary"
+        (click)="login()"
+        >Login</ion-button
+      >
+    </ion-col>
+  </ion-row>
 </ion-content>
