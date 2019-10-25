@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
         <ion-back-button defaultHref="/app/tabs/venues"></ion-back-button>
     </ion-buttons>
-    <ion-title>profile</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,14 +15,14 @@
     Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
   </div>
 
-      <label>
+      <ion-label>
          <input type="file" (change)="detectFiles($event)">
-      </label> 
+      </ion-label> 
 
-      <button
+      <ion-button
               [disabled]="!selectedFiles"
               (click)="uploadSingle()">
 
         Upload Single
-      </button>
+      </ion-button>
 </ion-content>
