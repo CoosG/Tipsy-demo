@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+declare var google;
 
 
 @Injectable({
@@ -48,6 +49,10 @@ export class GfencesService {
     }
 
     getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+      console.log(lat1);
+      console.log(lat2);
+      console.log(lon1);
+      console.log(lon2);
       var R = 6371; // Radius of the earth in km
       var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
       var dLon = this.deg2rad(lon2-lon1);
@@ -64,7 +69,23 @@ export class GfencesService {
       deg2rad(deg) {
         return deg * (Math.PI/180)
       }
-    }
+
+     /* addMaker(lat: number, lng: number) {
+        const marker = new google.maps.Marker({
+          position: { lat, lng },
+          map: this.mapRef,
+          title: 'taxi',
+          icon: { url: "../assets/icon/car.png",
+          scaledSize: new google.maps.Size(35, 35) },
+          })
+        //Marker + infowindow + angularjs compiled ng-click
+
+        let contentString = this.presentAlert();
+        var infowindow = new google.maps.InfoWindow({
+          content: HTMLIonAlertControllerElement
+
+           });
+    }*/
 
      /*distance(lat1, lon1, lat2, lon2) {
       let p = 0.017453292519943295;    // Math.PI / 180
@@ -105,5 +126,4 @@ export class GfencesService {
     console.log(dis);
     return dis;
   }*/
-
-
+}
