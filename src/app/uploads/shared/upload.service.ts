@@ -57,7 +57,7 @@ export class UploadService {
     `{
       "vid_furl": "` + upload.url + `",
       "u_id": "` + this.user.u_Email + `",
-      "vid_likes: "` + 0 + `",
+      "vid_likes": ` + 0 + `,
       "l_id": " ",
     }`
     ).subscribe((res) => {

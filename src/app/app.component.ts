@@ -34,11 +34,6 @@ export class AppComponent implements OnInit {
       url: '/app/tabs/map',
       icon: 'map'
     },
-    {
-      title: 'About',
-      url: '/app/tabs/about',
-      icon: 'information-circle'
-    }
   ];
   loggedIn = false;
 
@@ -80,7 +75,7 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
       this.splashScreen.hide();
     });
   }

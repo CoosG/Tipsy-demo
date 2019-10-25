@@ -1,13 +1,13 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserData } from '../../providers/user-data';
 import { Users } from '../../uploads/shared/users';
 
-import { UserOptions } from '../../interfaces/user-options';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ConnectDatabaseService } from './../../uploads/shared/connect-database.service';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -29,7 +29,8 @@ export class SignupPage implements OnInit {
     public router: Router,
     public userData: UserData,
     public user: Users,
-    public connectDB: ConnectDatabaseService
+    public connectDB: ConnectDatabaseService,
+    public storage: Storage
   ) {}
 
   async onSignup(form: NgForm) {
@@ -49,7 +50,8 @@ export class SignupPage implements OnInit {
 
     if (form.valid) {
       this.connectDB.addUser(this.user);
-      this.router.navigateByUrl('/app/tabs/schedule');
+      this.router.navigateByUrl('/app/tabs/schedule')
+      .then(() => this.storage.set('ion_did_login', true));
     }
   }
 }

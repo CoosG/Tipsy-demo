@@ -5,6 +5,8 @@ import { AlertController, IonList, LoadingController, ModalController, ToastCont
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media/ngx';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'page-schedule',
@@ -22,6 +24,7 @@ export class SchedulePage implements OnInit {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
+  arrGetVids: any = [];
 
   constructor(
     public alertCtrl: AlertController,
@@ -31,10 +34,29 @@ export class SchedulePage implements OnInit {
     public router: Router,
     public toastCtrl: ToastController,
     public user: UserData,
+    public streamingMedia: StreamingMedia,
+    public httpC: HttpClient
   ) { }
 
   ngOnInit() {
     this.updateSchedule();
+    this.loadVideos();
+  }
+
+  loadVideos() {
+    this.httpC.get('http://tipsyws/api/user/uservideos').subscribe( (res) => {
+      console.log(res);
+      this.arrGetVids = res;
+    });
+  }
+
+  playVideo(url: string) {
+    const options: StreamingVideoOptions = {
+      orientation: 'landscape',
+      controls: true,
+      shouldAutoClose: false
+    };
+    this.streamingMedia.playVideo('https://firebasestorage.googleapis.com/v0/b/potch-map-1566554712889.appspot.com/o/uploads%2F20191024_130641.mp4?alt=media&token=5c6cc07d-2fd0-4b8e-a722-77c690ab397b');
   }
 
   updateSchedule() {
