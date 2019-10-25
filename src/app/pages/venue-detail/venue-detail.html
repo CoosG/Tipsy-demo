@@ -40,6 +40,18 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card>
+    <ion-item>
+      <ion-icon name="beer" slot="start"></ion-icon>
+      <ion-label>Specials</ion-label>
+    </ion-item>
+
+    <ion-card-content>
+      These specials are available at {{ venue.name }}.
+      <img src="assets/img/123.jpg" />
+    </ion-card-content>
+  </ion-card>
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
     <ion-fab-button><ion-icon name="share"></ion-icon></ion-fab-button>
     <ion-fab-list side="top">
@@ -63,10 +75,15 @@
           <ion-icon name="logo-instagram"></ion-icon
         ></a>
       </ion-fab-button>
-      <ion-fab-button color="primary">
+      <ion-fab-button color="">
         <a href="https://www.facebook.com" target="blank">
           <ion-icon name="logo-facebook"></ion-icon
         ></a>
+      </ion-fab-button>
+      <ion-fab-button color="success">
+        <a href="https://web.whatsapp.com/" target="blank">
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </a>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
