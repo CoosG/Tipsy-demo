@@ -1,13 +1,19 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Skip</ion-button>
+      <ion-button color="primary" (click)="startApp()" [hidden]="!showSkip"
+        >Skip</ion-button
+      >
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+  <ion-slides
+    #slides
+    (ionSlideWillChange)="onSlideChangeStart($event)"
+    pager="false"
+  >
     <ion-slide>
       <img src="assets/img/socialpool.jpg" class="slide-image" />
       <h2 class="slide-title">
@@ -16,7 +22,8 @@
       </h2>
       <p>
         The
-        <b>Tipsy app</b> is a app that allows you to connect with your social pool.
+        <b>Tipsy app</b> is a app that allows you to connect with your social
+        pool.
       </p>
     </ion-slide>
 
@@ -24,41 +31,49 @@
       <img src="assets/img/Maps.jpg" class="slide-image" />
       <h2 class="slide-title">What is Tipsy?</h2>
       <p>
-        <b>Locate clubs and pubs</b> and know where your friends are partying.</p>
+        <b>Locate clubs and pubs</b> and know where your friends are partying.
+      </p>
     </ion-slide>
 
     <ion-slide>
       <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
       <h2 class="slide-title">Hours</h2>
       <p>
-        <b>Operating hours</b> See at what times your favourite bar opens and closes
+        <b>Operating hours</b> see at what times your favourite bar opens and
+        closes
       </p>
     </ion-slide>
 
     <ion-slide>
       <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
       <h2 class="slide-title">Specials</h2>
-      <p>
-         See all the great specials at your favourite bar</p>
+      <p>See all the <b>great specials</b> at your favourite bar</p>
     </ion-slide>
 
     <ion-slide>
-      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
+      <img src="assets/img/videoimage.png" class="slide-image" />
       <h2 class="slide-title">Video feed</h2>
+      <p></p>
       <p>
-        </p><p>See the latest videos taken at your favourite bar to get a feel for the vibe</p>
+        See the <b>latest videos</b> taken <b>at your favourite bar</b> to get a
+        feel for the vibe
+      </p>
     </ion-slide>
 
     <ion-slide>
       <img src="assets/img/rate.jpg" class="slide-image" />
       <h2 class="slide-title">Tipsy Review</h2>
       <p>
-        <b>Tipsy Review</b> can be used to review venues and receive a reward. (Coupons will be emailed to your account)</p>
+        <b>Tipsy Review</b> can be used to review venues and receive a reward.
+        (Coupons will be emailed to your account)
+      </p>
     </ion-slide>
 
     <ion-slide>
       <img src="assets/img/glass.jpg" class="slide-image" />
-      <h2 class="slide-title">Ready to Party?</h2>
+      <p class="slide-title">
+        <b>Ready to Party?</b>
+      </p>
       <ion-button fill="clear" (click)="startApp()">
         Continue
         <ion-icon slot="end" name="arrow-forward"></ion-icon>

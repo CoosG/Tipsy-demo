@@ -32,26 +32,23 @@
             }
           ]
         }
-
       ]
     }
   ],
 
-  "venues": [
-
-  ],
+  "venues": [],
 
   "map": [
     {
       "name": "Bourbon Street",
       "lat": -26.694877,
-      "lng":  27.095052,
+      "lng": 27.095052,
       "center": true
     },
     {
       "name": "Club MVG",
       "lat": -26.694086,
-      "lng": 27.094790
+      "lng": 27.09479
     },
     {
       "name": "Impala",
@@ -63,15 +60,15 @@
   "tracks": [
     {
       "name": "Potchefstroom",
-      "icon": "logo-angular"
+      "icon": "pin"
     },
     {
       "name": "Bloemfontein",
-      "icon": "document"
+      "icon": "pin"
     },
     {
       "name": "Pretoria",
-      "icon": "restaurant"
+      "icon": "pin"
     }
   ]
 }

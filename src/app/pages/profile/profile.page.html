@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-back-button defaultHref="/app/tabs/venues"></ion-back-button>
+      <ion-back-button defaultHref="/app/tabs/venues"></ion-back-button>
     </ion-buttons>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
@@ -10,11 +10,14 @@
 <ion-content>
   <div *ngIf="currentUpload">
     <div class="progress">
-      <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+      <div
+        class="progress-bar progress-bar-animated"
+        [ngStyle]="{ width: currentUpload?.progress + '%' }"
+      ></div>
     </div>
-    Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+    Progress: {{ currentUpload?.name }} | {{ currentUpload?.progress }}%
+    Complete
   </div>
-
       <ion-label>
          <input type="file" (change)="detectFiles($event)">
       </ion-label> 
