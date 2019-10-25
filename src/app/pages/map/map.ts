@@ -20,7 +20,14 @@ export class MapPage implements AfterViewInit {
 
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
-  constructor(public confData: ConferenceData, public platform: Platform, public geolocation: Geolocation ) {
+  constructor(public confData: ConferenceData, public platform: Platform, public geolocation: Geolocation) {
+
+    /*geofence.initialize().then(
+      // resolved promise does not return a value
+      () => console.log('Geofence Plugin Ready'),
+      (err) => console.log(err)
+    );*/
+
 
     // this.platform.ready().then(() => {
     //   const mapOptions = {
@@ -31,28 +38,6 @@ export class MapPage implements AfterViewInit {
     //   this.GetLocation();
     // });
   }
-
-    // GetLocation() {
-    //   const ref = this;
-    //   const watch = this.geolocation.watchPosition();
-    //   watch.subscribe((position) => {
-    //     const gps = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    //     if (ref.marker == null) {
-    //       ref.marker = new google.maps.Marker({
-    //         position: gps,
-    //         map: ref.map,
-    //         title: 'my position'
-    //       });
-    //     } else {
-    //       ref.marker.setPosition(gps);
-
-    //     }
-    //     ref.map.panTo(gps);
-    //     ref.latitude = position.coords.latitude.toString();
-    //     ref.longitude = position.coords.latitude.toString();
-    //     ref.timestamp = (new Date(position.timestamp)).toString();
-    //   });
-    // }
 
   async ngAfterViewInit() {
     const googleMaps = await getGoogleMaps(
@@ -86,6 +71,7 @@ export class MapPage implements AfterViewInit {
         mapEle.classList.add('show-map');
       });
     });
+
   }
 }
 

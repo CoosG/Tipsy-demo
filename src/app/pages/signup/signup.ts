@@ -9,7 +9,8 @@ import { UserOptions } from '../../interfaces/user-options';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ConnectDatabaseService } from './../../uploads/shared/connect-database.service';
 
-
+import { GfencesService } from './../../uploads/shared/gfences.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'page-signup',
@@ -21,6 +22,8 @@ export class SignupPage implements OnInit {
   cPassword = '';
   submitted = false;
 
+
+
   ngOnInit() {
   }
 
@@ -29,9 +32,20 @@ export class SignupPage implements OnInit {
     public router: Router,
     public userData: UserData,
     public user: Users,
-    public connectDB: ConnectDatabaseService
+    public connectDB: ConnectDatabaseService,
+    private GfencesService: GfencesService,
+    public toastController: ToastController
   ) {}
 
+  async openToast(){
+    let msg = this.GfencesService.calculateDistance();
+
+    const toast = await this.toastController.create({
+      message: msg ,
+      duration: 5000
+    });
+    toast.present();
+  }
   async onSignup(form: NgForm) {
 
     if (this.user.uPassword !== this.cPassword) {
