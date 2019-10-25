@@ -1,22 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { UploadService } from '../../uploads/shared/upload.service';
-import { Upload } from '../../uploads/shared/upload';
-import * as _ from 'lodash';
+import { Component, OnInit } from "@angular/core";
+import { UploadService } from "../../uploads/shared/upload.service";
+import { Upload } from "../../uploads/shared/upload";
+import * as _ from "lodash";
 
 @Component({
-  selector: 'profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: "profile",
+  templateUrl: "./profile.page.html",
+  styleUrls: ["./profile.page.scss"]
 })
 export class ProfilePage implements OnInit {
-
   selectedFiles: FileList;
   currentUpload: Upload;
 
-  constructor(private upSvc: UploadService) { }
+  constructor(private upSvc: UploadService) {}
 
   detectFiles(event) {
-      this.selectedFiles = event.target.files;
+    this.selectedFiles = event.target.files;
   }
 
   uploadSingle() {
@@ -28,12 +27,11 @@ export class ProfilePage implements OnInit {
   uploadMulti() {
     const files = this.selectedFiles;
     const filesIndex = _.range(files.length);
-    _.each(filesIndex, (idx) => {
+    _.each(filesIndex, idx => {
       this.currentUpload = new Upload(files[idx]);
-      this.upSvc.pushUpload(this.currentUpload); }
-    );
+      this.upSvc.pushUpload(this.currentUpload);
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

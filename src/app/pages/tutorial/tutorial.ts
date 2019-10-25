@@ -1,19 +1,19 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { MenuController, IonSlides } from '@ionic/angular';
+import { MenuController, IonSlides } from "@ionic/angular";
 
-import { Storage } from '@ionic/storage';
+import { Storage } from "@ionic/storage";
 
 @Component({
-  selector: 'page-tutorial',
-  templateUrl: 'tutorial.html',
-  styleUrls: ['./tutorial.scss'],
+  selector: "page-tutorial",
+  templateUrl: "tutorial.html",
+  styleUrls: ["./tutorial.scss"]
 })
 export class TutorialPage {
   showSkip = true;
 
-  @ViewChild('slides', { static: true }) slides: IonSlides;
+  @ViewChild("slides", { static: true }) slides: IonSlides;
 
   constructor(
     public menu: MenuController,
@@ -23,8 +23,8 @@ export class TutorialPage {
 
   startApp() {
     this.router
-      .navigateByUrl('/app/tabs/login')
-      .then(() => this.storage.set('ion_did_tutorial', true));
+      .navigateByUrl("/login")
+      .then(() => this.storage.set("ion_did_tutorial", true));
   }
 
   onSlideChangeStart(event) {
@@ -34,11 +34,11 @@ export class TutorialPage {
   }
 
   ionViewWillEnter() {
-    this.storage.get('ion_did_tutorial').then(res => {
+    this.storage.get("ion_did_tutorial").then(res => {
       if (res === true) {
-        this.storage.get('ion_did_login').then(res1 => {
+        this.storage.get("ion_did_login").then(res1 => {
           if (res1 === true) {
-            this.router.navigateByUrl('/app/tabs/schedule');
+            this.router.navigateByUrl("/app/tabs/schedule");
           }
         });
       }
