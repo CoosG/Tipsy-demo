@@ -9,9 +9,12 @@ import { Venue, FirebaseService } from "../../providers/firebase.service";
 })
 export class VenueDetailPage implements OnInit {
   venue: Venue = {
-    id: "",
+    desc: "",
+    location: "",
     name: "",
-    desc: ""
+    photo: "",
+    times: "",
+    id: ""
   };
 
   constructor(
