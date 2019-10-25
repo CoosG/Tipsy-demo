@@ -19,6 +19,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { RouteReuseStrategy } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MediaCapture } from '@ionic-native/media-capture/ngx';
@@ -54,7 +55,8 @@ import { Users } from './uploads/shared/users';
     MediaCapture,
     Media,
     File,
-    Users
+    Users,
+    StreamingMedia
   ],
   bootstrap: [AppComponent]
 })

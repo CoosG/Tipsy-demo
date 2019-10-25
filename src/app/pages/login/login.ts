@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ConnectDatabaseService } from './../../uploads/shared/connect-database.service';
 import { Users } from '../../uploads/shared/users';
 import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -30,7 +31,8 @@ export class LoginPage implements OnInit {
     public router: Router,
     public connectDB: ConnectDatabaseService,
     public user: Users,
-    public httpC: HttpClient
+    public httpC: HttpClient,
+    public storage: Storage
 
   ) { }
 
@@ -46,12 +48,17 @@ export class LoginPage implements OnInit {
           console.log('Found!', this.user.u_FirstName);
           if (this.user.u_Password === this.password) {
             console.log('Welcome' + this.user.u_FirstName);
-            this.router.navigateByUrl('/app/tabs/schedule');
+            this.router.navigateByUrl('/app/tabs/schedule')
+            .then(() => this.storage.set('ion_did_login', true));
           } else {console.log('Password does not match'); }
         }
       });
     } catch (err) {
       console.log('User does not exist');
     }
+  }
+
+  onSignup(){
+    this.router.navigateByUrl('/signup');
   }
 }

@@ -18,20 +18,14 @@
     Progress: {{ currentUpload?.name }} | {{ currentUpload?.progress }}%
     Complete
   </div>
+      <ion-label>
+         <input type="file" (change)="detectFiles($event)">
+      </ion-label> 
 
-  <label>
-    <input type="file" (change)="detectFiles($event)" />
-  </label>
+      <ion-button
+              [disabled]="!selectedFiles"
+              (click)="uploadSingle()">
 
-  <button [disabled]="!selectedFiles" (click)="uploadSingle()">
-    Upload Single
-  </button>
-
-  <label>
-    <input type="file" (change)="detectFiles($event)" multiple />
-  </label>
-
-  <button [disabled]="!selectedFiles" (click)="uploadMulti()">
-    Upload Multiple
-  </button>
+        Upload Single
+      </ion-button>
 </ion-content>
