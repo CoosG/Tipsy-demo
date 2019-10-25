@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Venue, FirebaseService } from "../../providers/firebase.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "page-venue-detail",
@@ -19,7 +20,8 @@ export class VenueDetailPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -33,5 +35,9 @@ export class VenueDetailPage implements OnInit {
         console.log(venue.name);
       });
     }
+  }
+
+  navigate() {
+    this.router.navigateByUrl("/app/tabs/map");
   }
 }

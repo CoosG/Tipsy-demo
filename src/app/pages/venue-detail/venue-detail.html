@@ -19,9 +19,19 @@
 
   <ion-card>
     <ion-item>
-      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-icon name="pin" slot="start" (click)="navigate()"></ion-icon>
       <ion-label>Maps</ion-label>
-      <ion-button fill="outline">View </ion-button>
+      <ion-button fill="outline"
+        >View
+        <p>
+          <a
+            class="e2e-trusted-url"
+            href="'{{ venue.location }}'"
+            target="blank"
+          >
+          </a>
+        </p>
+      </ion-button>
     </ion-item>
 
     <ion-card-content>
